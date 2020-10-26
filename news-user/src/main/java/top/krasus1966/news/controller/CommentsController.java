@@ -1,4 +1,4 @@
-package top.krasus1966.news.user.controller;
+package top.krasus1966.news.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

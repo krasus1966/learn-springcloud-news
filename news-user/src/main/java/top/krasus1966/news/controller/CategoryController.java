@@ -1,47 +1,47 @@
-package top.krasus1966.news.user.controller;
+package top.krasus1966.news.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.CommonControllerApi;
-import top.krasus1966.news.entity.AdminUser;
+import top.krasus1966.news.entity.Category;
 import top.krasus1966.news.result.Results;
 
 /**
  * <p>
- * 运营管理平台的admin级别用户 前端控制器
+ * 新闻资讯文章的分类（或者称之为领域） 前端控制器
  * </p>
  *
  * @author krasus1966
  * @since 2020-10-26
  */
 @RestController
-@RequestMapping("/news/admin-user")
-public class AdminUserController implements CommonControllerApi<AdminUser> {
+@RequestMapping("/news/category")
+public class CategoryController implements CommonControllerApi<Category> {
 
     @Override
-    public Results<AdminUser> insert(AdminUser adminUser) {
+    public Results<Category> insert(Category category) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> update(AdminUser adminUser) {
+    public Results<Category> update(Category category) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> delete(String ids) {
+    public Results<Category> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> query(AdminUser adminUser) {
+    public Results<Category> query(Category category) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> queryPage(Page<AdminUser> page, AdminUser adminUser) {
+    public Results<Category> queryPage(Page<Category> page, Category category) {
         return null;
     }
 }

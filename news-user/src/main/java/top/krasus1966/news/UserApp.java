@@ -1,4 +1,4 @@
-package top.krasus1966.news.user;
+package top.krasus1966.news;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
