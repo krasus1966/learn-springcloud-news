@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.krasus1966.news.mapper.AppUserMapper">
+
+    <!-- 开启二级缓存 -->
+<!--    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="top.krasus1966.news.entity.AppUser">
+        <result column="id" property="id" />
+        <result column="mobile" property="mobile" />
+        <result column="nickname" property="nickname" />
+        <result column="face" property="face" />
+        <result column="realname" property="realname" />
+        <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="district" property="district" />
+        <result column="active_status" property="activeStatus" />
+        <result column="total_income" property="totalIncome" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        mobile, nickname, face, realname, email, sex, birthday, province, city, district, active_status, total_income, created_time, updated_time
+    </sql>
+
+</mapper>
