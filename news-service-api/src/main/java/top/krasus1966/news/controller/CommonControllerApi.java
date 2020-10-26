@@ -11,7 +11,6 @@ import top.krasus1966.news.result.Results;
  * @date 2020/10/26 16:58
  **/
 @Api(value = "controller的标题",tags = {"xx功能的Controller"})
-@RestController
 public  interface CommonControllerApi<T> {
 
     @ApiOperation(value = "新增",notes = "新增",httpMethod = "POST")
