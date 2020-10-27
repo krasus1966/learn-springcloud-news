@@ -10,6 +10,11 @@ spring:
       default-auto-commit: true
       max-wait: 30000
       min-idle: 5
+  redis:
+    port: 6379
+    database: 0
+    password: 196610121
+    host: localhost
 mybatis-plus:
   type-aliases-package: top.krasus1966.news.entity
   mapper-locations: classpath:mapper/*.xml
