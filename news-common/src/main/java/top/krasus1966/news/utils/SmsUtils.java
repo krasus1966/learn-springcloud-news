@@ -32,7 +32,7 @@ public class SmsUtils {
         request.putQueryParameter("RegionId", "cn-hangzhou");
 
         request.putQueryParameter("PhoneNumbers", mobile);
-        request.putQueryParameter("SignName", "krasus1966");
+        request.putQueryParameter("SignName", "ABC商城");
         request.putQueryParameter("TemplateCode", "SMS_205137344");
         request.putQueryParameter("TemplateParam", "{\"code\":\""+code+"\"}");
 

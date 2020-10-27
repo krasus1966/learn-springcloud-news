@@ -15,6 +15,6 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "获得短信验证码",notes = "获得短信验证码",httpMethod = "POST")
     @PostMapping("/getSMSCode")
-    public Results getSMSCode();
+    Results getSMSCode();
 
 }
