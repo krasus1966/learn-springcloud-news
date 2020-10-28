@@ -1,4 +1,4 @@
-package top.krasus1966.news.controller;
+package top.krasus1966.news.controller.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;

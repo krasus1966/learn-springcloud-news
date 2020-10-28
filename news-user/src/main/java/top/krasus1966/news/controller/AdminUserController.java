@@ -4,7 +4,7 @@ package top.krasus1966.news.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.krasus1966.news.controller.CommonControllerApi;
+import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.AdminUser;
 import top.krasus1966.news.result.Results;
 

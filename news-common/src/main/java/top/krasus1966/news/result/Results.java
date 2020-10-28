@@ -1,6 +1,7 @@
 package top.krasus1966.news.result;
 
 import lombok.Data;
+import top.krasus1966.news.enums.ICommonEnum;
 
 /**
  * @author Krasus1966
@@ -51,21 +52,21 @@ public class Results<T> {
     /**
      * 无数据返回格式
      *
-     * @param resultEnum
+     * @param commonEnum
      * @return
      */
-    public static <T> Results<T> parse(ResultEnum resultEnum) {
-        return new Results<T>(resultEnum.getCode(), resultEnum.getMsg());
+    public static <T> Results<T> parse(ICommonEnum commonEnum) {
+        return new Results<T>(commonEnum.getCode(), commonEnum.getMsg());
     }
 
     /**
      * 有数据返回格式
      *
-     * @param resultEnum
+     * @param commonEnum
      * @param data
      * @return
      */
-    public static <T> Results<T> parse(ResultEnum resultEnum, T data) {
-        return new Results<T>(resultEnum.getCode(), resultEnum.getMsg(), data);
+    public static <T> Results<T> parse(ICommonEnum commonEnum, T data) {
+        return new Results<T>(commonEnum.getCode(), commonEnum.getMsg(), data);
     }
 }
