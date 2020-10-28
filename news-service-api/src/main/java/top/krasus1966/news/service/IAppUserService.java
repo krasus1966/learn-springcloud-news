@@ -13,4 +13,13 @@ import top.krasus1966.news.entity.AppUser;
  */
 public interface IAppUserService extends IService<AppUser> {
 
+    /**
+     * 查询用户是否存在
+     *
+     * @param mobile
+     * @return
+     */
+    AppUser queryMobileIsExist(String mobile);
+
+    AppUser createUser(String mobile);
 }

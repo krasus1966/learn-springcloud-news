@@ -1,23 +1,23 @@
 package top.krasus1966.news.exception;
 
-import top.krasus1966.news.enums.ICommonEnum;
+import top.krasus1966.news.enums.IResultEnum;
 
 /**
- * 通用异常处理
+ * 通用自定义异常
  *
  * @author Krasus1966
  * @date 2020/10/28 17:33
  **/
 public class CommonException extends RuntimeException {
 
-    private final ICommonEnum errorEnum;
+    private final IResultEnum resultEnum;
 
-    public CommonException(ICommonEnum errorEnum) {
-        super("code:{"+errorEnum.getCode()+"},message:{"+errorEnum.getMsg()+"}");
-        this.errorEnum = errorEnum;
+    public CommonException(IResultEnum resultEnum) {
+        super("code:{"+ resultEnum.getCode()+"},message:{"+ resultEnum.getMsg()+"}");
+        this.resultEnum = resultEnum;
     }
 
-    public ICommonEnum getErrorEnum() {
-        return errorEnum;
+    public IResultEnum getResultEnum() {
+        return resultEnum;
     }
 }

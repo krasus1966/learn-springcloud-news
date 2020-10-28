@@ -3,6 +3,7 @@ package top.krasus1966.news.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @TableName("app_user")
 @ApiModel(value="AppUser对象", description="网站用户")
-public class AppUser implements Serializable {
+public class AppUser extends Model<AppUser> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

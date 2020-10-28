@@ -3,7 +3,7 @@ package top.krasus1966.news.Interceptors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.krasus1966.news.enums.ErrorEnum;
+import top.krasus1966.news.enums.ResultEnum;
 import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.StaticConstant;
 import top.krasus1966.news.utils.IPUtils;
@@ -33,7 +33,7 @@ public class PassportInterceptor implements HandlerInterceptor {
         String userIp = IPUtils.getRequestIp(request);
         boolean keyIsExist = redisUtils.keyIsExist(StaticConstant.MOBILE_SMSCODE+":"+userIp);
         if (keyIsExist){
-            throw new CommonException(ErrorEnum.PASSPORT_TOO_BUSY);
+            throw new CommonException(ResultEnum.PASSPORT_TOO_BUSY);
         }
         return true;
     }

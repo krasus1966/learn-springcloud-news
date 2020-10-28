@@ -1,16 +1,28 @@
 package top.krasus1966.news.controller;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import top.krasus1966.news.bo.RegistLoginBO;
 import top.krasus1966.news.controller.api.PassportControllerApi;
+import top.krasus1966.news.entity.AppUser;
+import top.krasus1966.news.enums.IResultEnum;
 import top.krasus1966.news.enums.ResultEnum;
+import top.krasus1966.news.enums.dict.StatusEnum;
+import top.krasus1966.news.result.BindingResultError;
 import top.krasus1966.news.result.Results;
 import top.krasus1966.news.result.StaticConstant;
 import top.krasus1966.news.utils.IPUtils;
 import top.krasus1966.news.utils.SmsUtils;
+import top.krasus1966.news.user.service.IAppUserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * @author Krasus1966
@@ -22,8 +34,11 @@ public class PassportController extends BaseController implements PassportContro
     @Autowired
     private SmsUtils smsUtils;
 
+    @Autowired
+    private IAppUserService appUserService;
+
     @Override
-    public Results getSMSCode(String mobile, HttpServletRequest request) {
+    public Results getSMSCode(@RequestParam String mobile, HttpServletRequest request) {
         //获得用户ip地址
         String userIp = IPUtils.getRequestIp(request);
         //根据用户ip限制用户60秒才能请求一次短信
@@ -38,9 +53,31 @@ public class PassportController extends BaseController implements PassportContro
         return Results.parse(ResultEnum.SUCCESS);
     }
 
-    @GetMapping("/redis")
-    public Results redis(){
-        redisUtils.set("age","18");
-        return Results.parse(ResultEnum.SUCCESS,redisUtils.get("age"));
+    @Override
+    public Results<IResultEnum> doLogin(@Valid RegistLoginBO registLoginBO, BindingResult result) {
+        if (result.hasErrors()){
+            Map<String,String> map = BindingResultError.getError(result);
+            return Results.parse(ResultEnum.PARAM_NOT_VALID,map);
+        }
+        // 验证验证码是否匹配
+        String mobile = registLoginBO.getMobile();
+        String smsCode = registLoginBO.getSmsCode();
+        String redisCode = redisUtils.get(StaticConstant.MOBILE_SMSCODE+":"+mobile);
+        if (StrUtil.hasBlank(redisCode)){
+            return Results.parse(ResultEnum.SMS_CODE_TIME_OUT);
+        }
+        if (!redisCode.equalsIgnoreCase(smsCode)){
+            return Results.parse(ResultEnum.SMS_CODE_ERROR);
+        }
+        // 通过手机号获取数据库中的用户
+        AppUser user = appUserService.getOne(new QueryWrapper<AppUser>().eq("mobile",mobile));
+        if (user != null && StatusEnum.STATUS_OFF.type.equals(user.getActiveStatus())){
+            return Results.parse(ResultEnum.USER_FROZEN);
+        }else if (null == user){
+            user = appUserService.createUser(mobile);
+        }
+
+
+        return Results.parse(ResultEnum.SUCCESS);
     }
 }
