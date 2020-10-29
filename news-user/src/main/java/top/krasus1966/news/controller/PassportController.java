@@ -19,10 +19,13 @@ import top.krasus1966.news.result.StaticConstant;
 import top.krasus1966.news.utils.IPUtils;
 import top.krasus1966.news.utils.SmsUtils;
 import top.krasus1966.news.user.service.IAppUserService;
+import top.krasus1966.news.utils.TokenUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author Krasus1966
@@ -38,7 +41,7 @@ public class PassportController extends BaseController implements PassportContro
     private IAppUserService appUserService;
 
     @Override
-    public Results getSMSCode(@RequestParam String mobile, HttpServletRequest request) {
+    public Results<String> getSMSCode(@RequestParam String mobile, HttpServletRequest request) {
         //获得用户ip地址
         String userIp = IPUtils.getRequestIp(request);
         //根据用户ip限制用户60秒才能请求一次短信
@@ -50,11 +53,11 @@ public class PassportController extends BaseController implements PassportContro
         //验证码存入redis，用于后续验证
         redisUtils.set(StaticConstant.MOBILE_SMSCODE+":"+mobile,random,30 * 60);
 
-        return Results.parse(ResultEnum.SUCCESS);
+        return Results.parse(ResultEnum.SUCCESS,random);
     }
 
     @Override
-    public Results<IResultEnum> doLogin(@Valid RegistLoginBO registLoginBO, BindingResult result) {
+    public Results<Integer> doLogin(@Valid RegistLoginBO registLoginBO, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
         if (result.hasErrors()){
             Map<String,String> map = BindingResultError.getError(result);
             return Results.parse(ResultEnum.PARAM_NOT_VALID,map);
@@ -77,7 +80,18 @@ public class PassportController extends BaseController implements PassportContro
             user = appUserService.createUser(mobile);
         }
 
+        int userActiveStatus = user.getActiveStatus();
+        if (userActiveStatus != StatusEnum.STATUS_OFF.type){
+            // 保存token
+            String token = UUID.randomUUID().toString();
+            redisUtils.set(StaticConstant.USER_TOKEN+":"+user.getId(),token);
 
-        return Results.parse(ResultEnum.SUCCESS);
+            // 保存用户ID和token到cookie中
+            TokenUtils.setCookie(request,response,StaticConstant.USER_TOKEN,token,StaticConstant.COOKIE_TIME_OUT_MONTH);
+            TokenUtils.setCookie(request,response,StaticConstant.USER_ID,user.getId(),StaticConstant.COOKIE_TIME_OUT_MONTH);
+        }
+
+        redisUtils.del(StaticConstant.MOBILE_SMSCODE+":"+mobile);
+        return Results.parse(ResultEnum.SUCCESS,userActiveStatus);
     }
 }

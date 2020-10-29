@@ -13,6 +13,11 @@ public class StaticConstant {
 
     public static final String MOBILE_SMSCODE = "mobile:SMSCode";
 
+    public static final String USER_TOKEN = "krasus_1966";
+    public static final String USER_ID = "user_id";
+
+    public static final Integer COOKIE_TIME_OUT_MONTH = 30 * 24 * 60 * 60;
+
     public static final String DATE_TIME_FORMAT1="yyyy-MM-dd HH:mm:ss";
     public static final String DATE_TIME_FORMAT2="yyyy-MM-dd HH:mm:ss";
     public static final String DATE_TIME_FORMAT3="yyyy-MM-dd HH:mm";

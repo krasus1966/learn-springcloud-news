@@ -10,6 +10,7 @@ import top.krasus1966.news.enums.IResultEnum;
 import top.krasus1966.news.result.Results;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Krasus1966
@@ -21,9 +22,9 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "获得短信验证码",notes = "获得短信验证码",httpMethod = "POST")
     @PostMapping("/getSMSCode")
-    Results<IResultEnum> getSMSCode(String mobile, HttpServletRequest request);
+    Results<String> getSMSCode(String mobile, HttpServletRequest request);
 
     @ApiOperation(value = "一键登录注册",notes = "一键登录注册",httpMethod = "POST")
     @PostMapping("/doLogin")
-    Results<IResultEnum> doLogin(RegistLoginBO registLoginBO, BindingResult result);
+    Results<Integer> doLogin(RegistLoginBO registLoginBO, BindingResult result,HttpServletRequest request, HttpServletResponse response);
 }
