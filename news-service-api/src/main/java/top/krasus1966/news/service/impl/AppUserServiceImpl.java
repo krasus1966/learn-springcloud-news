@@ -10,7 +10,7 @@ import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.dict.SexEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.mapper.AppUserMapper;
-import top.krasus1966.news.user.service.IAppUserService;
+import top.krasus1966.news.service.IAppUserService;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;

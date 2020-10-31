@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import top.krasus1966.news.entity.Fans;
 import top.krasus1966.news.mapper.FansMapper;
-import top.krasus1966.news.user.service.IFansService;
+import top.krasus1966.news.service.IFansService;
 
 
 /**

@@ -16,9 +16,9 @@ import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
 import top.krasus1966.news.result.Results;
 import top.krasus1966.news.result.StaticConstant;
+import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.utils.IPUtils;
 import top.krasus1966.news.utils.SmsUtils;
-import top.krasus1966.news.user.service.IAppUserService;
 import top.krasus1966.news.utils.TokenUtils;
 
 import javax.servlet.http.HttpServletRequest;

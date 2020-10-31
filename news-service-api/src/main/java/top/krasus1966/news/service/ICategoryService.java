@@ -1,4 +1,4 @@
-package top.krasus1966.news.user.service;
+package top.krasus1966.news.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import top.krasus1966.news.entity.Category;

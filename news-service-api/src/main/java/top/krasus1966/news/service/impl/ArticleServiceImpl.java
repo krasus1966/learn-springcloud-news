@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import top.krasus1966.news.entity.Article;
 import top.krasus1966.news.mapper.ArticleMapper;
-import top.krasus1966.news.user.service.IArticleService;
+import top.krasus1966.news.service.IArticleService;
 
 /**
  * <p>

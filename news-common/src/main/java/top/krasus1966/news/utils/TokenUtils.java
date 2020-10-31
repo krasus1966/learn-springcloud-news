@@ -1,5 +1,8 @@
 package top.krasus1966.news.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +23,6 @@ public class TokenUtils {
             cookieValue = URLEncoder.encode(cookieValue,"utf-8");
             Cookie cookie = new Cookie(cookieName,cookieValue);
             cookie.setMaxAge(maxAge);
-            // 设置域名
-            //cookie.setDomain();
             cookie.setPath("/");
             response.addCookie(cookie);
         } catch (UnsupportedEncodingException e) {

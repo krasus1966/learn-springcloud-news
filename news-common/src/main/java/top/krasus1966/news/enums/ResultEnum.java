@@ -23,6 +23,8 @@ public enum ResultEnum  implements IResultEnum {
     SMS_CODE_TIME_OUT(504,"验证码已过期"),
     SMS_CODE_ERROR(505,"验证码不匹配"),
     PASSPORT_TOO_BUSY(502,"发送短信太过频繁！"),
+
+    ID_BLANK_ERROR(500,"id不能为空！"),
     ;
 
     private final Integer code;

@@ -10,7 +10,7 @@ import top.krasus1966.news.result.Results;
  * @author Krasus1966
  * @date 2020/10/26 16:58
  **/
-@Api(value = "controller的标题",tags = {"xx功能的Controller"})
+@Api(value = "controller的标题",tags = {"xx功能"})
 public  interface CommonControllerApi<T> {
 
     @ApiOperation(value = "新增",notes = "新增",httpMethod = "POST")
