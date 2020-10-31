@@ -1,12 +1,9 @@
 package top.krasus1966.news.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.bo.UpdateUserInfoBO;
 import top.krasus1966.news.controller.api.UserInfoControllerApi;
