@@ -64,7 +64,7 @@ public class PassportController extends BaseController implements PassportContro
         String mobile = registLoginBO.getMobile();
         String smsCode = registLoginBO.getSmsCode();
         String redisCode = redisUtils.get(Constants.MOBILE_SMSCODE+":"+mobile);
-        if (StrUtil.hasBlank(redisCode)){
+        if (StrUtil.isNotBlank(redisCode)){
             return R.parse(ResultsEnum.SMS_CODE_TIME_OUT);
         }
         if (!redisCode.equalsIgnoreCase(smsCode)){

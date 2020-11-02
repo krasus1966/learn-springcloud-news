@@ -13,8 +13,11 @@ public class Constants {
     public static final Integer STATUS_SUCCESS = 200;
     public static final Integer STATUS_FAIL = 500;
 
+    // 短信验证码
     public static final String MOBILE_SMSCODE = "mobile:SMSCode";
 
+    // 用户信息相关
+    public static final String USER_INFO = "user_info";
     public static final String USER_TOKEN = "krasus_1966";
     public static final String USER_ID = "user_id";
 

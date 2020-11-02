@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import top.krasus1966.news.Interceptors.PassportInterceptor;
+import top.krasus1966.news.Interceptors.UserInterceptor;
 
 /**
  * @author Krasus1966
@@ -18,8 +19,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
         return new PassportInterceptor();
     }
 
+    @Bean
+    public UserInterceptor userInterceptor(){
+        return new UserInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor()).addPathPatterns("/passport/getSMSCode");
+        registry.addInterceptor(userInterceptor()).addPathPatterns("/user/*");
     }
 }

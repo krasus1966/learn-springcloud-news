@@ -14,16 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>top.krasus1966</groupId>
-            <artifactId>news-model</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>top.krasus1966</groupId>
-            <artifactId>news-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>top.krasus1966</groupId>
             <artifactId>news-service</artifactId>
             <version>${project.version}</version>
         </dependency>

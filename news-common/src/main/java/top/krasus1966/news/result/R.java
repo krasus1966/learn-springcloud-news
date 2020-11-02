@@ -2,6 +2,7 @@ package top.krasus1966.news.result;
 
 import lombok.Data;
 import top.krasus1966.news.enums.IResultsEnum;
+import top.krasus1966.news.exception.CommonException;
 
 import java.util.List;
 import java.util.Map;
@@ -111,5 +112,15 @@ public class R<T> {
      */
     public static <T> R<T> parse(IResultsEnum resultEnum, List<T> data) {
         return new R<>(resultEnum.getCode(), resultEnum.getMsg(), (T) data);
+    }
+
+    /**
+     * 异常返回
+     *
+     * @param error 封装返回信息
+     * @return @{code,msg,data}
+     */
+    public static void error(IResultsEnum error) {
+        throw new CommonException(error);
     }
 }

@@ -15,6 +15,7 @@ public enum ResultsEnum implements IResultsEnum {
     UN_LOGIN(301,"用户未登录！"),
     NO_AUTH_INFO(302,"无权限！"),
     USER_FROZEN(303,"此用户已被冻结！"),
+    SESSION_INVALID(304,"会话失效，请重新登录！"),
     SERVER_UNEXCEPTION_ERROR(500,"服务器内部错误！"),
     FAILED(501,"操作失败！"),
     PARAM_NOT_VALID(503,"参数信息不合法！"),
