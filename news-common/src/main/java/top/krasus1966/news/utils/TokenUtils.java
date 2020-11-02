@@ -1,14 +1,18 @@
 package top.krasus1966.news.utils;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.krasus1966.news.enums.ResultsEnum;
+import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.R;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -54,5 +58,13 @@ public class TokenUtils {
             R.error(ResultsEnum.UN_LOGIN);
             return false;
         }
+    }
+
+    public static void setResponse(CommonException e, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter pw = response.getWriter();
+        pw.print(JSONUtil.parse(e.getResultEnum()));
+        pw.close();
+        response.flushBuffer();
     }
 }

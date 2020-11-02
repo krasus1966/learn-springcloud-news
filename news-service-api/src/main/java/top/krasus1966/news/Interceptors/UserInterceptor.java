@@ -1,15 +1,14 @@
 package top.krasus1966.news.Interceptors;
 
-import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.Constants;
+import top.krasus1966.news.utils.TokenUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 /**
  * @author Krasus1966
@@ -34,11 +33,7 @@ public class UserInterceptor extends BaseInterceptor implements HandlerIntercept
             return super.tokenUtils.verifyUserToken(userId,userToken,Constants.USER_TOKEN);
         }catch (CommonException e){
             log.error("CommonException:code={},msg={}", e.getResultEnum().getCode(), e.getResultEnum().getMsg());
-            response.setContentType("application/json; charset=utf-8");
-            PrintWriter pw = response.getWriter();
-            pw.print(JSONUtil.parse(e.getResultEnum()));
-            pw.close();
-            response.flushBuffer();
+            TokenUtils.setResponse(e,response);
             return false;
         }
     }
