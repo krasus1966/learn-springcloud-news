@@ -85,7 +85,7 @@ public class R<T> {
      * @param <T> 范型
      * @return @{code,msg,data}
      */
-    public static <T> R<T> parse(IResultsEnum resultEnum, Map<String, T> data) {
+    public static <T> R<T> parse(IResultsEnum resultEnum, Map<?,?> data) {
         return new R<>(resultEnum.getCode(), resultEnum.getMsg(), (T) data);
     }
 

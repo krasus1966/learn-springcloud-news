@@ -55,7 +55,7 @@ public class PassportController extends BaseController implements PassportContro
     }
 
     @Override
-    public R<?> doLogin(@Valid RegistLoginBO registLoginBO, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
+    public R<Integer> doLogin(@Valid RegistLoginBO registLoginBO, BindingResult result, HttpServletRequest request, HttpServletResponse response) {
         if (result.hasErrors()){
             Map<String,String> map = BindingResultError.getError(result);
             return R.parse(ResultsEnum.PARAM_NOT_VALID,map);
