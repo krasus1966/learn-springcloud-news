@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.bo.UpdateUserInfoBO;
 import top.krasus1966.news.controller.api.UserInfoControllerApi;
 import top.krasus1966.news.entity.AppUser;
-import top.krasus1966.news.enums.ResultEnum;
+import top.krasus1966.news.enums.ResultsEnum;
+import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.vo.AppUserVO;
+import top.krasus1966.news.vo.UserAccountVO;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -28,28 +31,41 @@ public class UserController extends BaseController implements UserInfoController
     private IAppUserService userService;
 
     @Override
-    public Results<AppUserVO> getUserInfo(String userId) {
+    public R<UserAccountVO> getAccountInfo(String userId) {
         if (StrUtil.hasBlank(userId)){
-            return Results.parse(ResultEnum.UN_LOGIN);
+            return R.parse(ResultsEnum.UN_LOGIN);
         }
         AppUser appUser = userService.getById(userId);
-        AppUserVO userAccountInfo = new AppUserVO();
+        UserAccountVO userAccountInfo = new UserAccountVO();
         BeanUtils.copyProperties(appUser,userAccountInfo);
-        return Results.parse(ResultEnum.SUCCESS,userAccountInfo);
+        return R.parse(ResultsEnum.SUCCESS,userAccountInfo);
     }
 
     @Override
-    public Results<UpdateUserInfoBO> updateUserInfo(@Valid UpdateUserInfoBO updateUserInfoBO, BindingResult result) {
+    public R<AppUserVO> getUserInfo(String userId) {
+        if (StrUtil.hasBlank(userId)){
+            return R.parse(ResultsEnum.UN_LOGIN);
+        }
+        AppUser appUser = userService.getById(userId);
+        AppUserVO userVO = new AppUserVO();
+        BeanUtils.copyProperties(appUser,userVO);
+        return R.parse(ResultsEnum.SUCCESS,userVO);
+    }
+
+    @Override
+    public R<UpdateUserInfoBO> updateUserInfo(@Valid UpdateUserInfoBO updateUserInfoBO, BindingResult result) {
         if (result.hasErrors()){
             Map<String,String> map = BindingResultError.getError(result);
-            return Results.parse(ResultEnum.PARAM_NOT_VALID,map);
+            return R.parse(ResultsEnum.PARAM_NOT_VALID,map);
         }
         AppUser appUser = userService.getById(updateUserInfoBO.getId());
         BeanUtils.copyProperties(updateUserInfoBO,appUser);
+        appUser.setUpdatedTime(LocalDateTime.now());
+        appUser.setActiveStatus(StatusEnum.STATUS_ON.type);
         if (userService.updateById(appUser)){
-            return Results.parse(ResultEnum.SUCCESS,updateUserInfoBO);
+            return R.parse(ResultsEnum.SUCCESS,updateUserInfoBO);
         }else{
-            return Results.parse(ResultEnum.FAILED);
+            return R.parse(ResultsEnum.FAILED);
         }
     }
 }

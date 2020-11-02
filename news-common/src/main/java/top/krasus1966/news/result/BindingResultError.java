@@ -1,6 +1,5 @@
 package top.krasus1966.news.result;
 
-import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -15,6 +14,9 @@ import java.util.Map;
  * @date 2020/10/28 21:54
  **/
 public class BindingResultError {
+
+    private BindingResultError(){}
+
     public static Map<String, String> getError(BindingResult result){
         Map<String,String> map = new HashMap<>();
         List<FieldError> errorList = result.getFieldErrors();

@@ -6,7 +6,9 @@ package top.krasus1966.news.result;
  * @author Krasus1966
  * @date 2020/10/28 16:43
  **/
-public class StaticConstant {
+public class Constants {
+
+    private Constants(){}
 
     public static final Integer STATUS_SUCCESS = 200;
     public static final Integer STATUS_FAIL = 500;

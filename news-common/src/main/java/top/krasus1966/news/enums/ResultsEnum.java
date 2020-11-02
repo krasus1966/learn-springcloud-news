@@ -1,14 +1,12 @@
 package top.krasus1966.news.enums;
 
-import top.krasus1966.news.result.StaticConstant;
-
 /**
  * 结果返回Enum
  *
  * @author Krasus1966
  * @date 2020/10/8 21:38
  **/
-public enum ResultEnum  implements IResultEnum {
+public enum ResultsEnum implements IResultsEnum {
 
     /**
      * 返回结果
@@ -30,7 +28,7 @@ public enum ResultEnum  implements IResultEnum {
     private final Integer code;
     private final String msg;
 
-    ResultEnum(int code, String msg) {
+    ResultsEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

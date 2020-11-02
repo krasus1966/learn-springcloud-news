@@ -13,6 +13,7 @@
         <module>news-service-api</module>
         <module>news-user</module>
         <module>news-generator</module>
+        <module>news-service</module>
     </modules>
 
     <name>news</name>

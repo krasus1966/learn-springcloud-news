@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.Comments;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 
 /**
  * <p>
@@ -21,27 +21,27 @@ import top.krasus1966.news.result.Results;
 public class CommentsController implements CommonControllerApi<Comments> {
 
     @Override
-    public Results<Comments> insert(Comments comments) {
+    public R<Comments> insert(Comments comments) {
         return null;
     }
 
     @Override
-    public Results<Comments> update(Comments comments) {
+    public R<Comments> update(Comments comments) {
         return null;
     }
 
     @Override
-    public Results<Comments> delete(String ids) {
+    public R<Comments> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<Comments> query(Comments comments) {
+    public R<Comments> query(Comments comments) {
         return null;
     }
 
     @Override
-    public Results<Comments> queryPage(Page<Comments> page, Comments comments) {
+    public R<Comments> queryPage(Page<Comments> page, Comments comments) {
         return null;
     }
 }

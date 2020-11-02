@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.Category;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 
 /**
  * <p>
@@ -21,27 +21,27 @@ import top.krasus1966.news.result.Results;
 public class CategoryController implements CommonControllerApi<Category> {
 
     @Override
-    public Results<Category> insert(Category category) {
+    public R<Category> insert(Category category) {
         return null;
     }
 
     @Override
-    public Results<Category> update(Category category) {
+    public R<Category> update(Category category) {
         return null;
     }
 
     @Override
-    public Results<Category> delete(String ids) {
+    public R<Category> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<Category> query(Category category) {
+    public R<Category> query(Category category) {
         return null;
     }
 
     @Override
-    public Results<Category> queryPage(Page<Category> page, Category category) {
+    public R<Category> queryPage(Page<Category> page, Category category) {
         return null;
     }
 }

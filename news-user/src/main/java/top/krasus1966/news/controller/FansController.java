@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.Fans;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 
 /**
  * <p>
@@ -25,27 +25,27 @@ import top.krasus1966.news.result.Results;
 public class FansController implements CommonControllerApi<Fans> {
 
     @Override
-    public Results<Fans> insert(Fans fans) {
+    public R<Fans> insert(Fans fans) {
         return null;
     }
 
     @Override
-    public Results<Fans> update(Fans fans) {
+    public R<Fans> update(Fans fans) {
         return null;
     }
 
     @Override
-    public Results<Fans> delete(String ids) {
+    public R<Fans> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<Fans> query(Fans fans) {
+    public R<Fans> query(Fans fans) {
         return null;
     }
 
     @Override
-    public Results<Fans> queryPage(Page<Fans> page, Fans fans) {
+    public R<Fans> queryPage(Page<Fans> page, Fans fans) {
         return null;
     }
 }

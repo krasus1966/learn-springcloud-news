@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.AdminUser;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 
 /**
  * <p>
@@ -21,27 +21,27 @@ import top.krasus1966.news.result.Results;
 public class AdminUserController implements CommonControllerApi<AdminUser> {
 
     @Override
-    public Results<AdminUser> insert(AdminUser adminUser) {
+    public R<AdminUser> insert(AdminUser adminUser) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> update(AdminUser adminUser) {
+    public R<AdminUser> update(AdminUser adminUser) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> delete(String ids) {
+    public R<AdminUser> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> query(AdminUser adminUser) {
+    public R<AdminUser> query(AdminUser adminUser) {
         return null;
     }
 
     @Override
-    public Results<AdminUser> queryPage(Page<AdminUser> page, AdminUser adminUser) {
+    public R<AdminUser> queryPage(Page<AdminUser> page, AdminUser adminUser) {
         return null;
     }
 }

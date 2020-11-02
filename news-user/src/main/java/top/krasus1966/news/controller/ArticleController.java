@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.krasus1966.news.controller.api.CommonControllerApi;
 import top.krasus1966.news.entity.Article;
-import top.krasus1966.news.result.Results;
+import top.krasus1966.news.result.R;
 
 /**
  * <p>
@@ -21,27 +21,27 @@ import top.krasus1966.news.result.Results;
 public class ArticleController implements CommonControllerApi<Article> {
 
     @Override
-    public Results<Article> insert(Article article) {
+    public R<Article> insert(Article article) {
         return null;
     }
 
     @Override
-    public Results<Article> update(Article article) {
+    public R<Article> update(Article article) {
         return null;
     }
 
     @Override
-    public Results<Article> delete(String ids) {
+    public R<Article> delete(String ids) {
         return null;
     }
 
     @Override
-    public Results<Article> query(Article article) {
+    public R<Article> query(Article article) {
         return null;
     }
 
     @Override
-    public Results<Article> queryPage(Page<Article> page, Article article) {
+    public R<Article> queryPage(Page<Article> page, Article article) {
         return null;
     }
 }

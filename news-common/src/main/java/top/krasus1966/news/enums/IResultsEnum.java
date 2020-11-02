@@ -6,7 +6,7 @@ package top.krasus1966.news.enums;
  * @author Krasus1966
  * @date 2020/10/28 17:38
  **/
-public interface IResultEnum {
+public interface IResultsEnum {
     Integer getCode();
     String getMsg();
 }

@@ -3,9 +3,9 @@ package top.krasus1966.news.Interceptors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.krasus1966.news.enums.ResultEnum;
+import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.exception.CommonException;
-import top.krasus1966.news.result.StaticConstant;
+import top.krasus1966.news.result.Constants;
 import top.krasus1966.news.utils.IPUtils;
 import top.krasus1966.news.utils.RedisUtils;
 
@@ -31,9 +31,9 @@ public class PassportInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String userIp = IPUtils.getRequestIp(request);
-        boolean keyIsExist = redisUtils.keyIsExist(StaticConstant.MOBILE_SMSCODE+":"+userIp);
+        boolean keyIsExist = redisUtils.keyIsExist(Constants.MOBILE_SMSCODE+":"+userIp);
         if (keyIsExist){
-            throw new CommonException(ResultEnum.PASSPORT_TOO_BUSY);
+            throw new CommonException(ResultsEnum.PASSPORT_TOO_BUSY);
         }
         return true;
     }

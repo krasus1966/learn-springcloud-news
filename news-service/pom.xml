@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>news-service-api</artifactId>
+    <artifactId>news-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -20,11 +20,6 @@
         <dependency>
             <groupId>top.krasus1966</groupId>
             <artifactId>news-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>top.krasus1966</groupId>
-            <artifactId>news-service</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
