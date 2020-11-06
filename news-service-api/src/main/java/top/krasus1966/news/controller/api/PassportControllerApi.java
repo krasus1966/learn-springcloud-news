@@ -29,5 +29,5 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "退出登录",notes = "退出登录",httpMethod = "POST")
     @PostMapping("/logout")
-    R<Integer> logout(HttpServletRequest request, HttpServletResponse response);
+    R logout(HttpServletRequest request, HttpServletResponse response);
 }
