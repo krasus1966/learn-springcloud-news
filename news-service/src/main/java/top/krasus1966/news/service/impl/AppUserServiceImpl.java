@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import top.krasus1966.news.mapper.AppUserMapper;
+import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.dict.SexEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
-import top.krasus1966.news.mapper.AppUserMapper;
 import top.krasus1966.news.result.Constants;
-import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.utils.JsonUtils;
 import top.krasus1966.news.utils.RedisUtils;
 

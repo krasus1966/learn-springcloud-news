@@ -26,4 +26,8 @@ public interface PassportControllerApi {
     @ApiOperation(value = "一键登录注册",notes = "一键登录注册",httpMethod = "POST")
     @PostMapping("/doLogin")
     R<Integer> doLogin(RegistLoginBO registLoginBO, BindingResult result, HttpServletRequest request, HttpServletResponse response);
+
+    @ApiOperation(value = "退出登录",notes = "退出登录",httpMethod = "POST")
+    @PostMapping("/logout")
+    R<Integer> logout(HttpServletRequest request, HttpServletResponse response);
 }

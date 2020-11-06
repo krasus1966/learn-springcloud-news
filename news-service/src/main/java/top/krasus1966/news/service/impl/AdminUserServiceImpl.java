@@ -2,9 +2,9 @@ package top.krasus1966.news.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import top.krasus1966.news.entity.AdminUser;
 import top.krasus1966.news.mapper.AdminUserMapper;
 import top.krasus1966.news.service.IAdminUserService;
+import top.krasus1966.news.entity.AdminUser;
 
 /**
  * <p>

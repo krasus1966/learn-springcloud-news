@@ -12,10 +12,11 @@ import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
-import top.krasus1966.news.result.R;
 import top.krasus1966.news.result.Constants;
+import top.krasus1966.news.result.R;
 import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.utils.IPUtils;
+import top.krasus1966.news.utils.LoginUtils;
 import top.krasus1966.news.utils.SmsUtils;
 import top.krasus1966.news.utils.TokenUtils;
 
@@ -64,7 +65,7 @@ public class PassportController extends BaseController implements PassportContro
         String mobile = registLoginBO.getMobile();
         String smsCode = registLoginBO.getSmsCode();
         String redisCode = redisUtils.get(Constants.MOBILE_SMSCODE+":"+mobile);
-        if (StrUtil.isNotBlank(redisCode)){
+        if (!StrUtil.isNotBlank(redisCode)){
             return R.parse(ResultsEnum.SMS_CODE_TIME_OUT);
         }
         if (!redisCode.equalsIgnoreCase(smsCode)){
@@ -85,11 +86,17 @@ public class PassportController extends BaseController implements PassportContro
             redisUtils.set(Constants.USER_TOKEN+":"+user.getId(),token);
 
             // 保存用户ID和token到cookie中
-            TokenUtils.setCookie(request,response, Constants.USER_TOKEN,token, Constants.COOKIE_TIME_OUT_MONTH);
+            TokenUtils.setHeader(request,response, Constants.USER_TOKEN,token, Constants.COOKIE_TIME_OUT_MONTH);
             TokenUtils.setCookie(request,response, Constants.USER_ID,user.getId(), Constants.COOKIE_TIME_OUT_MONTH);
         }
 
         redisUtils.del(Constants.MOBILE_SMSCODE+":"+mobile);
         return R.parse(ResultsEnum.SUCCESS,userActiveStatus);
+    }
+
+    @Override
+    public R logout(HttpServletRequest request, HttpServletResponse response) {
+        LoginUtils.logout();
+        return R.parse(ResultsEnum.LOG_OUT_SUCCESS);
     }
 }

@@ -12,6 +12,7 @@ public enum ResultsEnum implements IResultsEnum {
      * 返回结果
      */
     SUCCESS(200, "操作成功！"),
+    LOG_OUT_SUCCESS(200, "退出登录成功！"),
     UN_LOGIN(301,"用户未登录！"),
     NO_AUTH_INFO(302,"无权限！"),
     USER_FROZEN(303,"此用户已被冻结！"),

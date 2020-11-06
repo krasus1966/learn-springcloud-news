@@ -10,9 +10,19 @@ spring:
       default-auto-commit: true
       max-wait: 30000
       min-idle: 5
+      filters: stat
+      initialSize: 2
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 200
   redis:
     port: 6379
-    database: 0
+    database: 1
     password: 196610121
     host: localhost
 mybatis-plus:
