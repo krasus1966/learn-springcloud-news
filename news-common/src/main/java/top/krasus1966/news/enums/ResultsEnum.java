@@ -19,6 +19,7 @@ public enum ResultsEnum implements IResultsEnum {
     SESSION_INVALID(304,"会话失效，请重新登录！"),
     SERVER_UNEXCEPTION_ERROR(500,"服务器内部错误！"),
     FAILED(501,"操作失败！"),
+    LOG_OUT_FAIL(501, "退出登录成功！"),
     PARAM_NOT_VALID(503,"参数信息不合法！"),
     SMS_CODE_TIME_OUT(504,"验证码已过期"),
     SMS_CODE_ERROR(505,"验证码不匹配"),

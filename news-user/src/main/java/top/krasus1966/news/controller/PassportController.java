@@ -96,7 +96,9 @@ public class PassportController extends BaseController implements PassportContro
 
     @Override
     public R logout(HttpServletRequest request, HttpServletResponse response) {
-        LoginUtils.logout();
-        return R.parse(ResultsEnum.LOG_OUT_SUCCESS);
+        if (LoginUtils.logout()){
+            return R.parse(ResultsEnum.LOG_OUT_SUCCESS);
+        }
+        return R.parse(ResultsEnum.LOG_OUT_FAIL);
     }
 }

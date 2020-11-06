@@ -15,22 +15,34 @@ import javax.servlet.http.HttpServletRequest;
  **/
 public class LoginUtils {
 
+    /**
+     * 通过 header 获取 token
+     * @return token
+     */
     public static String getToken(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request.getHeader(Constants.USER_TOKEN);
     }
 
-    public static Cookie getCookie(){
+    /**
+     * 通过 cookie 获取 token
+     * @return token
+     */
+    public static String getCookie(){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie:cookies){
-            if (StrUtil.isNotBlank(cookie.getName())&& cookie.getName().equals(Constants.USER_ID)){
-                return cookie;
+            if (StrUtil.isNotBlank(cookie.getName())&& cookie.getName().equals(Constants.USER_TOKEN)){
+                return cookie.getValue();
             }
         }
         return null;
     }
 
+    /**
+     * 注销登录
+     * @return boolean
+     */
     public static boolean logout(){
         String token = getToken();
         RedisUtils redisUtils = SpringUtil.getBean(RedisUtils.class);
