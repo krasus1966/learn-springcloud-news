@@ -1,7 +1,6 @@
 package top.krasus1966.news.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import top.krasus1966.news.entity.AdminUser;
 
 /**
@@ -12,7 +11,6 @@ import top.krasus1966.news.entity.AdminUser;
  * @author krasus1966
  * @since 2020-10-26
  */
-@Mapper
 public interface AdminUserMapper extends BaseMapper<AdminUser> {
 
 }

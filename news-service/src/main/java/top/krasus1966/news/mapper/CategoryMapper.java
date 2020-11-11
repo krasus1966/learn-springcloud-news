@@ -12,7 +12,6 @@ import top.krasus1966.news.entity.Category;
  * @author krasus1966
  * @since 2020-10-26
  */
-@Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
 
 }

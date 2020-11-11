@@ -29,6 +29,10 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
@@ -80,11 +84,11 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.4</version>
         </dependency>
-        <!--   joda-time时间工具     -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
+<!--        &lt;!&ndash;   joda-time时间工具     &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>joda-time</groupId>-->
+<!--            <artifactId>joda-time</artifactId>-->
+<!--        </dependency>-->
         <!--   阿里云SDK依赖     -->
         <dependency>
             <groupId>com.aliyun</groupId>
