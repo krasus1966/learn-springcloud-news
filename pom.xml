@@ -11,9 +11,9 @@
         <module>news-common</module>
         <module>news-model</module>
         <module>news-service-api</module>
-        <module>news-user</module>
         <module>news-generator</module>
         <module>news-service</module>
+        <module>news-web</module>
     </modules>
 
     <name>news</name>
