@@ -13,7 +13,7 @@ import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.dict.SexEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
-import top.krasus1966.news.result.Constants;
+import top.krasus1966.news.result.StaticUtils;
 import top.krasus1966.news.utils.JsonUtils;
 import top.krasus1966.news.utils.RedisUtils;
 
@@ -67,17 +67,17 @@ public class AppUserServiceImpl extends ServiceImpl<AppUserMapper, AppUser> impl
 
         // 更新前删除缓存
         String userId = appUser.getId();
-        redisUtils.del(Constants.USER_INFO + ":" + userId);
+        redisUtils.del(StaticUtils.USER_INFO + ":" + userId);
         boolean result = super.updateById(appUser);
         if (result) {
             AppUser userInfo = this.getUserById(userId);
             // 重写缓存数据
-            redisUtils.set(Constants.USER_INFO + ":" + userId, JsonUtils.objectToJson(userInfo));
+            redisUtils.set(StaticUtils.USER_INFO + ":" + userId, JsonUtils.objectToJson(userInfo));
         }
         try {
             // 等待后再次删除缓存
             Thread.sleep(100);
-            redisUtils.del(Constants.USER_INFO + ":" + userId);
+            redisUtils.del(StaticUtils.USER_INFO + ":" + userId);
             return result;
         } catch (InterruptedException e) {
             log.error("catch InterruptedException",e);
@@ -89,12 +89,12 @@ public class AppUserServiceImpl extends ServiceImpl<AppUserMapper, AppUser> impl
     @Override
     public AppUser getUserById(String userId) {
         AppUser user = null;
-        String userJson = redisUtils.get(Constants.USER_INFO + ":" + userId);
+        String userJson = redisUtils.get(StaticUtils.USER_INFO + ":" + userId);
         if (!StrUtil.isNotBlank(userJson)) {
             user = JsonUtils.jsonToPojo(userJson, AppUser.class);
         } else {
             user = super.getById(userId);
-            redisUtils.set(Constants.USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
+            redisUtils.set(StaticUtils.USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
         }
         return user;
     }

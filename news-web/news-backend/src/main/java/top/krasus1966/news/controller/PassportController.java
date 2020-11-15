@@ -12,7 +12,7 @@ import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
-import top.krasus1966.news.result.Constants;
+import top.krasus1966.news.result.StaticUtils;
 import top.krasus1966.news.result.R;
 import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.utils.IPUtils;
@@ -23,7 +23,6 @@ import top.krasus1966.news.utils.TokenUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import java.util.Map;
 import java.util.UUID;
 
@@ -45,13 +44,13 @@ public class PassportController extends BaseController implements PassportContro
         //获得用户ip地址
         String userIp = IPUtils.getRequestIp(request);
         //根据用户ip限制用户60秒才能请求一次短信
-        redisUtils.setnx60s(Constants.MOBILE_SMSCODE+":"+userIp,userIp);
+        redisUtils.setnx60s(StaticUtils.MOBILE_SMSCODE+":"+userIp,userIp);
         //生成随机验证码
         String random = (int)((Math.random() *9 +1) * 100000) + "";
         //发送短信
 //        smsUtils.sendSms(mobile,random);
         //验证码存入redis，用于后续验证
-        redisUtils.set(Constants.MOBILE_SMSCODE+":"+mobile,random,30 * 60);
+        redisUtils.set(StaticUtils.MOBILE_SMSCODE+":"+mobile,random,30 * 60);
 
         return R.parse(ResultsEnum.SUCCESS,random);
     }
@@ -65,7 +64,7 @@ public class PassportController extends BaseController implements PassportContro
         // 验证验证码是否匹配
         String mobile = registLoginBO.getMobile();
         String smsCode = registLoginBO.getSmsCode();
-        String redisCode = redisUtils.get(Constants.MOBILE_SMSCODE+":"+mobile);
+        String redisCode = redisUtils.get(StaticUtils.MOBILE_SMSCODE+":"+mobile);
         if (!StrUtil.isNotBlank(redisCode)){
             return R.parse(ResultsEnum.SMS_CODE_TIME_OUT);
         }
@@ -84,14 +83,14 @@ public class PassportController extends BaseController implements PassportContro
         if (userActiveStatus != StatusEnum.STATUS_OFF.type){
             // 保存token
             String token = UUID.randomUUID().toString();
-            redisUtils.set(Constants.USER_TOKEN+":"+user.getId(),token);
+            redisUtils.set(StaticUtils.USER_TOKEN+":"+user.getId(),token);
 
             // 保存用户ID和token到cookie中
-            TokenUtils.setHeader(request,response, Constants.USER_TOKEN,token, Constants.COOKIE_TIME_OUT_MONTH);
-            TokenUtils.setCookie(request,response, Constants.USER_ID,user.getId(), Constants.COOKIE_TIME_OUT_MONTH);
+            TokenUtils.setHeader(request,response, StaticUtils.USER_TOKEN,token, StaticUtils.COOKIE_TIME_OUT_MONTH);
+            TokenUtils.setCookie(request,response, StaticUtils.USER_ID,user.getId(), StaticUtils.COOKIE_TIME_OUT_MONTH);
         }
 
-        redisUtils.del(Constants.MOBILE_SMSCODE+":"+mobile);
+        redisUtils.del(StaticUtils.MOBILE_SMSCODE+":"+mobile);
         return R.parse(ResultsEnum.SUCCESS,userActiveStatus);
     }
 

@@ -1,11 +1,13 @@
-package top.krasus1966.news.Interceptors;
+package top.krasus1966.news.interceptors;
 
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.krasus1966.news.exception.CommonException;
-import top.krasus1966.news.result.Constants;
-import top.krasus1966.news.utils.TokenUtils;
+import top.krasus1966.news.enums.ResultsEnum;
+import top.krasus1966.news.result.StaticUtils;
+import top.krasus1966.news.result.R;
+import top.krasus1966.news.utils.IPUtils;
+import top.krasus1966.news.utils.RedisUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Krasus1966
  * @date 2020/10/28 17:14
  **/
-@Slf4j
-public class UserInterceptor extends BaseInterceptor implements HandlerInterceptor {
+public class PassportInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    public RedisUtils redisUtils;
     /**
      * 拦截请求 false拦截 true放行
      * @param request
@@ -27,17 +30,14 @@ public class UserInterceptor extends BaseInterceptor implements HandlerIntercept
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String userToken = request.getHeader(Constants.USER_TOKEN);
-        String userId = request.getHeader(Constants.USER_ID);
-        try{
-            return super.tokenUtils.verifyUserToken(userId,userToken,Constants.USER_TOKEN);
-        }catch (CommonException e){
-            log.error("CommonException:code={},msg={}", e.getResultEnum().getCode(), e.getResultEnum().getMsg());
-            TokenUtils.setResponse(e,response);
+        String userIp = IPUtils.getRequestIp(request);
+        boolean keyIsExist = redisUtils.keyIsExist(StaticUtils.MOBILE_SMSCODE+":"+userIp);
+        if (keyIsExist){
+            R.error(ResultsEnum.PASSPORT_TOO_BUSY);
             return false;
         }
+        return true;
     }
-
 
     /**
      * 请求后，渲染视图前

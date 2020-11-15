@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:196610121@127.0.0.1:27017
+      database: news
+
+website:
+  domain-name: localhost
+

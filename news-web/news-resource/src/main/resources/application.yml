@@ -1,0 +1,16 @@
+server:
+  port: 8002
+  tomcat:
+    uri-encoding: UTF-8
+    # Tomcat默认超过2M文件上传会报错，改为-1表示不限制
+    max-swallow-size: -1
+spring:
+  profiles:
+    active: dev
+  application:
+    name: news-resource
+  jmx:
+    default-domain: news-resource
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

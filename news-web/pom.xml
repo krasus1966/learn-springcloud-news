@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>news-backend</module>
+        <module>news-resource</module>
     </modules>
 
 

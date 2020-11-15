@@ -1,4 +1,4 @@
-package top.krasus1966.news.Interceptors;
+package top.krasus1966.news.interceptors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import top.krasus1966.news.utils.RedisUtils;
