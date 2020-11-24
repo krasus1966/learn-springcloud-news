@@ -17,6 +17,8 @@ public enum ResultsEnum implements IResultsEnum {
     NO_AUTH_INFO(302,"无权限！"),
     USER_FROZEN(303,"此用户已被冻结！"),
     SESSION_INVALID(304,"会话失效，请重新登录！"),
+    UPLOAD_FILE_NOT_EXIST(404,"上传的文件不存在"),
+    NO_UPLOAD_FILE(404,"请选择上传的文件!"),
     SERVER_UNEXCEPTION_ERROR(500,"服务器内部错误！"),
     FAILED(501,"操作失败！"),
     LOG_OUT_FAIL(501,"退出登陆失败！"),
