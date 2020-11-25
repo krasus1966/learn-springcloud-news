@@ -35,7 +35,7 @@ public class CommonExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     public R<String> commonErrorHandler(Exception e) {
-        log.error("UnKnownException:msg={}", e);
+        log.error("UnKnownException:msg={}", e.getMessage(),e);
         return R.parse(ResultsEnum.SERVER_UNEXCEPTION_ERROR);
     }
 }
