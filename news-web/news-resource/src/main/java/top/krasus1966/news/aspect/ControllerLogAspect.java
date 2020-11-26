@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Krasus1966
- * @date 2020/11/6 14:34
+ * @date 2020/11/26 23:21
  **/
 @Aspect
 @Component
 @Slf4j
-public class ServiceLogAspect {
+public class ControllerLogAspect {
 
     /**
      * AOP通知：
@@ -23,7 +23,7 @@ public class ServiceLogAspect {
      * 4. 异常通知
      * 5. 最终通知
      */
-    @Around("execution(* top.krasus1966.*.service.impl..*.*(..))")
+    @Around("execution(* top.krasus1966.*.controller..*.*(..))")
     public Object recordTimeOfService(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("===开始执行 {}.{} ===",joinPoint.getTarget().getClass(),joinPoint.getSignature().getName());
         long start = System.currentTimeMillis();

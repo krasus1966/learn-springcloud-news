@@ -18,6 +18,7 @@ import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.R;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -71,7 +72,7 @@ public class UploadController {
             resp.setContentType(gridFsResource.getContentType());
             resp.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(Objects.requireNonNull(gridFsResource.getFilename()), "UTF-8"));
             InputStream inputStream = gridFsResource.getInputStream();
-            OutputStream outputStream = resp.getOutputStream();
+            ServletOutputStream outputStream = resp.getOutputStream();
             int length = -1;
             byte[] bs = new byte[1024];
             int len;
@@ -90,6 +91,7 @@ public class UploadController {
                     outputStream.write(bs, 0, len);
                 }
             }
+            resp.flushBuffer();
         } catch (Exception e) {
             log.error("/resource/download ERROR", e);
             throw new CommonException(ResultsEnum.SERVER_UNEXCEPTION_ERROR);
