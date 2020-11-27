@@ -7,7 +7,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.gridfs.GridFsObject;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +18,8 @@ import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.R;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
@@ -72,9 +70,9 @@ public class UploadController {
         try {
             GridFsResource gridFsResource = gridFsTemplate.getResource(gridFsFile);
             resp.setContentType(gridFsResource.getContentType());
-            resp.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(Objects.requireNonNull(gridFsResource.getFilename()),"UTF-8"));
+            resp.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(Objects.requireNonNull(gridFsResource.getFilename()), "UTF-8"));
             InputStream inputStream = gridFsResource.getInputStream();
-            OutputStream outputStream = resp.getOutputStream();
+            ServletOutputStream outputStream = resp.getOutputStream();
             int length = -1;
             byte[] bs = new byte[1024];
             int len;
@@ -85,7 +83,7 @@ public class UploadController {
                         outputStream.flush();
                         length -= len;
                     } else {
-                        outputStream.write(bs, 0, (int) length);
+                        outputStream.write(bs, 0, length);
                         outputStream.flush();
                         break;
                     }
@@ -93,6 +91,7 @@ public class UploadController {
                     outputStream.write(bs, 0, len);
                 }
             }
+            resp.flushBuffer();
         } catch (Exception e) {
             log.error("/resource/download ERROR", e);
             throw new CommonException(ResultsEnum.SERVER_UNEXCEPTION_ERROR);
