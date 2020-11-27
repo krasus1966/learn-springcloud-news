@@ -9,11 +9,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import top.krasus1966.news.controller.api.resource.FileControllerApi;
 import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.exception.CommonException;
 import top.krasus1966.news.result.R;
@@ -21,24 +20,27 @@ import top.krasus1966.news.result.R;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
+ * 文件上传下载Controller
+ *
  * @author Krasus1966
  * @date 2020/11/15 15:23
  **/
 @RestController
-@RequestMapping("/resource")
 @Slf4j
-public class UploadController {
+public class FileController implements FileControllerApi {
 
     @Autowired
     private GridFsTemplate gridFsTemplate;
 
-    @PostMapping("/upload")
+
+    @Override
     public R<String> upload(@RequestParam("files") MultipartFile[] files) {
         try {
             if (null == files || files.length == 0) {
@@ -57,7 +59,7 @@ public class UploadController {
         }
     }
 
-    @RequestMapping("/download")
+    @Override
     public void download(@RequestParam("fileId") String fileId, HttpServletResponse resp) {
         if (StrUtil.isEmpty(fileId)) {
             R.error(ResultsEnum.PARAM_NOT_VALID);

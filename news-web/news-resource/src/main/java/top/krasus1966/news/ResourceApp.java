@@ -3,7 +3,6 @@ package top.krasus1966.news;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.jdbc.DatabaseDriver;
 
 /**
  * @author Krasus1966

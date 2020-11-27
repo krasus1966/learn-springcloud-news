@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author Krasus1966
- * @date 2020/10/26 17:37
+ * @date 2020/11/27 15:20
  **/
 @Configuration
 @MapperScan("top.krasus1966.news.mapper")

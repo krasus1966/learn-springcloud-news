@@ -32,7 +32,7 @@ public class UserController extends BaseController implements UserInfoController
 
     @Override
     public R<UserAccountVO> getAccountInfo(String userId) {
-        if (StrUtil.isNotBlank(userId)) {
+        if (StrUtil.isBlank(userId)) {
             return R.parse(ResultsEnum.UN_LOGIN);
         }
         AppUser appUser = userService.getUserById(userId);
@@ -43,7 +43,7 @@ public class UserController extends BaseController implements UserInfoController
 
     @Override
     public R<AppUserVO> getUserInfo(String userId) {
-        if (StrUtil.isNotBlank(userId)) {
+        if (StrUtil.isBlank(userId)) {
             return R.parse(ResultsEnum.UN_LOGIN);
         }
         AppUser appUser = userService.getUserById(userId);

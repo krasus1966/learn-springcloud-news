@@ -12,6 +12,7 @@ import top.krasus1966.news.entity.AppUser;
  * @author krasus1966
  * @since 2020-10-26
  */
+@Mapper
 public interface AppUserMapper extends BaseMapper<AppUser> {
 
 }
