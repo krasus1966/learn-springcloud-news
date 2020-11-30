@@ -25,6 +25,7 @@ spring:
     database: 1
     password: 196610121
     host: localhost
+
 mybatis-plus:
   type-aliases-package: top.krasus1966.news.entity
   mapper-locations: classpath:mapper/*.xml

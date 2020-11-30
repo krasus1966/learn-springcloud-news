@@ -18,3 +18,10 @@ spring:
     multipart:
       max-file-size: 100GB
       max-request-size: 100GB
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      repositories:
+        type: none

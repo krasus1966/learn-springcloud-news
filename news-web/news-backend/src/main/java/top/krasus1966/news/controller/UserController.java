@@ -12,7 +12,6 @@ import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
 import top.krasus1966.news.result.R;
-import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.vo.AppUserVO;
 import top.krasus1966.news.vo.UserAccountVO;
 
@@ -26,46 +25,49 @@ import java.util.Map;
  **/
 @RestController
 public class UserController extends BaseController implements UserInfoControllerApi {
-
-    @Autowired
-    private IAppUserService userService;
+//
+//    @Autowired
+//    private IAppUserService userService;
 
     @Override
     public R<UserAccountVO> getAccountInfo(String userId) {
-        if (StrUtil.isBlank(userId)) {
-            return R.parse(ResultsEnum.UN_LOGIN);
-        }
-        AppUser appUser = userService.getUserById(userId);
-        UserAccountVO userAccountInfo = new UserAccountVO();
-        BeanUtils.copyProperties(appUser, userAccountInfo);
-        return R.parse(ResultsEnum.SUCCESS, userAccountInfo);
+//        if (StrUtil.isBlank(userId)) {
+//            return R.parse(ResultsEnum.UN_LOGIN);
+//        }
+//        AppUser appUser = userService.getUserById(userId);
+//        UserAccountVO userAccountInfo = new UserAccountVO();
+//        BeanUtils.copyProperties(appUser, userAccountInfo);
+//        return R.parse(ResultsEnum.SUCCESS, userAccountInfo);
+        return null;
     }
 
     @Override
     public R<AppUserVO> getUserInfo(String userId) {
-        if (StrUtil.isBlank(userId)) {
-            return R.parse(ResultsEnum.UN_LOGIN);
-        }
-        AppUser appUser = userService.getUserById(userId);
-        AppUserVO userVO = new AppUserVO();
-        BeanUtils.copyProperties(appUser, userVO);
-        return R.parse(ResultsEnum.SUCCESS, userVO);
+//        if (StrUtil.isBlank(userId)) {
+//            return R.parse(ResultsEnum.UN_LOGIN);
+//        }
+//        AppUser appUser = userService.getUserById(userId);
+//        AppUserVO userVO = new AppUserVO();
+//        BeanUtils.copyProperties(appUser, userVO);
+//        return R.parse(ResultsEnum.SUCCESS, userVO);
+        return null;
     }
 
     @Override
     public R<UpdateUserInfoBO> updateUserInfo(@Valid UpdateUserInfoBO updateUserInfoBO, BindingResult result) {
-        if (result.hasErrors()) {
-            Map<String, String> map = BindingResultError.getError(result);
-            return R.parse(ResultsEnum.PARAM_NOT_VALID, map);
-        }
-        AppUser appUser = userService.getUserById(updateUserInfoBO.getId());
-        BeanUtils.copyProperties(updateUserInfoBO, appUser);
-        appUser.setUpdatedTime(LocalDateTime.now());
-        appUser.setActiveStatus(StatusEnum.STATUS_ON.type);
-        if (userService.updateUserInfo(appUser)) {
-            return R.parse(ResultsEnum.SUCCESS, updateUserInfoBO);
-        } else {
-            return R.parse(ResultsEnum.FAILED);
-        }
+//        if (result.hasErrors()) {
+//            Map<String, String> map = BindingResultError.getError(result);
+//            return R.parse(ResultsEnum.PARAM_NOT_VALID, map);
+//        }
+//        AppUser appUser = userService.getUserById(updateUserInfoBO.getId());
+//        BeanUtils.copyProperties(updateUserInfoBO, appUser);
+//        appUser.setUpdatedTime(LocalDateTime.now());
+//        appUser.setActiveStatus(StatusEnum.STATUS_ON.type);
+//        if (userService.updateUserInfo(appUser)) {
+//            return R.parse(ResultsEnum.SUCCESS, updateUserInfoBO);
+//        } else {
+//            return R.parse(ResultsEnum.FAILED);
+//        }
+        return null;
     }
 }

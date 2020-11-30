@@ -12,8 +12,9 @@ import top.krasus1966.news.entity.AppUser;
 import top.krasus1966.news.enums.ResultsEnum;
 import top.krasus1966.news.enums.dict.StatusEnum;
 import top.krasus1966.news.result.BindingResultError;
-import top.krasus1966.news.result.StaticUtils;
 import top.krasus1966.news.result.R;
+import top.krasus1966.news.result.StaticUtils;
+import top.krasus1966.news.service.IAppUserService;
 import top.krasus1966.news.utils.IPUtils;
 import top.krasus1966.news.utils.LoginUtils;
 import top.krasus1966.news.utils.SmsUtils;
@@ -34,9 +35,9 @@ public class PassportController extends BaseController implements PassportContro
 
     @Autowired
     private SmsUtils smsUtils;
-//
-//    @Autowired
-//    private IAppUserService appUserService;
+
+    @Autowired
+    private IAppUserService appUserService;
 
     @Override
     public R<String> getSMSCode(@RequestParam String mobile, HttpServletRequest request) {
@@ -70,28 +71,27 @@ public class PassportController extends BaseController implements PassportContro
         if (!redisCode.equalsIgnoreCase(smsCode)){
             return R.parse(ResultsEnum.SMS_CODE_ERROR);
         }
-//        // 通过手机号获取数据库中的用户
-//        AppUser user = appUserService.getOne(new QueryWrapper<AppUser>().eq("mobile",mobile));
-//        if (user != null && StatusEnum.STATUS_OFF.type.equals(user.getActiveStatus())){
-//            return R.parse(ResultsEnum.USER_FROZEN);
-//        }else if (null == user){
-//            user = appUserService.createUser(mobile);
-//        }
-//
-//        int userActiveStatus = user.getActiveStatus();
-//        if (userActiveStatus != StatusEnum.STATUS_OFF.type){
-//            // 保存token
-//            String token = UUID.randomUUID().toString();
-//            redisUtils.set(StaticUtils.USER_TOKEN+":"+user.getId(),token);
-//
-//            // 保存用户ID和token到cookie中
-//            TokenUtils.setHeader(request,response, StaticUtils.USER_TOKEN,token, StaticUtils.COOKIE_TIME_OUT_MONTH);
-//            TokenUtils.setCookie(request,response, StaticUtils.USER_ID,user.getId(), StaticUtils.COOKIE_TIME_OUT_MONTH);
-//        }
-//
-//        redisUtils.del(StaticUtils.MOBILE_SMSCODE+":"+mobile);
-//        return R.parse(ResultsEnum.SUCCESS,userActiveStatus);
-        return null;
+        // 通过手机号获取数据库中的用户
+        AppUser user = appUserService.getOne(new QueryWrapper<AppUser>().eq("mobile",mobile));
+        if (user != null && StatusEnum.STATUS_OFF.type.equals(user.getActiveStatus())){
+            return R.parse(ResultsEnum.USER_FROZEN);
+        }else if (null == user){
+            user = appUserService.createUser(mobile);
+        }
+
+        int userActiveStatus = user.getActiveStatus();
+        if (userActiveStatus != StatusEnum.STATUS_OFF.type){
+            // 保存token
+            String token = UUID.randomUUID().toString();
+            redisUtils.set(StaticUtils.USER_TOKEN+":"+user.getId(),token);
+
+            // 保存用户ID和token到cookie中
+            TokenUtils.setHeader(request,response, StaticUtils.USER_TOKEN,token, StaticUtils.COOKIE_TIME_OUT_MONTH);
+            TokenUtils.setCookie(request,response, StaticUtils.USER_ID,user.getId(), StaticUtils.COOKIE_TIME_OUT_MONTH);
+        }
+
+        redisUtils.del(StaticUtils.MOBILE_SMSCODE+":"+mobile);
+        return R.parse(ResultsEnum.SUCCESS,userActiveStatus);
     }
 
     @Override

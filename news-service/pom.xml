@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>top.krasus1966</groupId>
-            <artifactId>news-model</artifactId>
+            <artifactId>news-service-api</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
